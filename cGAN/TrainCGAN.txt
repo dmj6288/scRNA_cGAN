@@ -1,0 +1,21 @@
+#!/bin/bash -l
+
+#SBATCH -N 1 --ntasks-per-node=6 --partition=gpu
+#SBATCH --time=24:00:00  # Increase based on your needs
+#SBATCH --gres=gpu:1
+#SBATCH --job-name="cGAN_MNIST"
+#SBATCH --output=/home/dennis00/scRNA_GAN/slurm_archive/%j_conditional_gan.out
+
+echo Running
+module load cuda/12.1
+
+cd $SLURM_SUBMIT_DIR
+
+cd /home/dennis00/scRNA_GAN/GAN_control/cGAN/
+
+conda activate scRNA-GAN-TF
+
+python3 train.py
+
+echo train_cGAN.py
+echo "SLURM Job ID        : ${SLURM_JOB_ID}"
