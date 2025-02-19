@@ -16,7 +16,7 @@ columns_to_concat = ['control_rx_id', 'bb1_id', 'bb2_id', 'bb3_id', 'bb4_id']
 smiles['sample'] = smiles[columns_to_concat].astype(str).agg('_'.join, axis=1)
 
 # Example SMILES strings
-smiles_data = smiles['SMILES'].tolist()[7000:]
+smiles_data = smiles['SMILES'].tolist()[0:1]
 
 # Function to get embeddings for a single SMILES
 def get_single_embedding(smiles):
@@ -48,5 +48,5 @@ embeddings = get_chemberta_embeddings_parallel(smiles_data, num_threads=num_thre
 embeddings_df = pd.DataFrame(embeddings)
 print(embeddings_df.head(10))
 
-with open("../ZafrensData/embedded_smiles/embedded_smiles_2.pkl", "wb") as file:
+with open("../ZafrensData/embedded_smiles/embedded_smiles_0.pkl", "wb") as file:
     pkl.dump(embeddings_df, file)
